@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DJ Haemmer • Momente, die bleiben</title>
+  <meta name="description" content="DJ Haemmer – Club- & Event-DJ aus Hamm (NRW). Saubere Übergänge, starker Spannungsaufbau, Latin · 2000er · Deutschrap · House. Jetzt Booking anfragen." />
+  <meta name="theme-color" content="#0a0f1f" />
+  <meta property="og:title" content="DJ Haemmer • Momente, die bleiben" />
+  <meta property="og:description" content="Club- & Event-DJ aus Hamm (NRW). Jetzt Booking anfragen." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/assets/preview.jpg" />
+  <meta property="og:url" content="https://example.com/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#070a14;        
+      --surface:#0b1224;   
+      --line:rgba(255,255,255,.08);
+      --ink:#e7ecff;       
+      --muted:#a9b7ff;     
+      --accent:#39d2ff;    
+      --accent2:#b44cff;   
+      --ok:#00e6a0;        
+      --radius:18px;
+      --shadow:0 6px 24px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; color:var(--ink); background:
+        radial-gradient(1000px 480px at 10% -5%, rgba(57,210,255,.10), transparent 60%),
+        radial-gradient(900px 520px at 90% -10%, rgba(180,76,255,.10), transparent 60%),
+        linear-gradient(180deg,#060912,#090f1e 40%,#070a14);
+      background-attachment:fixed; font-family:Inter, Montserrat, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      line-height:1.6; letter-spacing:.2px;
+    }
+    img{max-width:100%; height:auto; display:block}
+    a{color:var(--accent); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .container{max-width:1120px; margin:0 auto; padding:0 20px}
+
+    /* ===== NAV ===== */
+    .nav{position:sticky; top:0; z-index:60; backdrop-filter:saturate(140%) blur(8px); background:rgba(7,10,20,.55); border-bottom:1px solid var(--line)}
+    .nav-inner{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
+    .brand{display:flex; align-items:center; gap:12px}
+    .logo{width:36px; height:36px; border-radius:10px; background: conic-gradient(from 0deg, var(--accent), var(--accent2), var(--ok), var(--accent)); box-shadow:0 0 18px rgba(57,210,255,.5)}
+    .brand h1{font: 800 18px/1 Montserrat, sans-serif; margin:0; letter-spacing:1px}
+    .nav-links{display:flex; gap:16px; align-items:center}
+    .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px; border:1px solid var(--line); background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); color:var(--ink); font-weight:600; box-shadow:var(--shadow)}
+    .btn-primary{background:linear-gradient(90deg, var(--accent), var(--accent2)); color:#06101f; border:none; font-weight:800}
+
+    /* mobile menu */
+    .hamburger{display:none; width:36px; height:36px; place-items:center; border:1px solid var(--line); border-radius:10px; background:rgba(255,255,255,.03)}
+    @media (max-width:860px){
+      .nav-links{display:none}
+      .hamburger{display:grid}
+      .drawer{display:block}
+    }
+    .drawer{display:none; border-top:1px solid var(--line); background:rgba(7,10,20,.85)}
+    .drawer a{display:block; padding:14px 20px}
+
+    /* ===== HERO ===== */
+    .hero{position:relative; overflow:hidden}
+    .hero .wrap{display:grid; grid-template-columns:1.05fr .95fr; gap:28px; align-items:center; padding:72px 0}
+    @media (max-width:960px){.hero .wrap{grid-template-columns:1fr; padding:56px 0}}
+    .eyebrow{font:800 12px/1.1 Montserrat; letter-spacing:2px; text-transform:uppercase; color:var(--muted)}
+    .headline{font:800 clamp(28px,4.8vw,56px)/1.04 Montserrat, sans-serif; margin:10px 0}
+    .lead{color:#CFE3FF; max-width:60ch}
+    .cta{display:flex; gap:12px; flex-wrap:wrap; margin-top:20px}
+
+    /* showcase (subtle lasers) */
+    .card{border-radius:var(--radius); background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.025)); border:1px solid var(--line); box-shadow:var(--shadow); padding:16px}
+    .stage{position:relative; height:380px; border-radius:14px; overflow:hidden; border:1px solid var(--line); background:radial-gradient(650px 280px at 50% 105%, rgba(0,0,0,.85), rgba(0,0,0,.35) 40%, rgba(0,0,0,.1) 70%, transparent), linear-gradient(180deg,#0b1226,#0b1020)}
+    .beam{position:absolute; bottom:58px; left:50%; width:2px; height:0; background:currentColor; transform-origin:bottom center; opacity:.9}
+    .beam::before{content:""; position:absolute; inset:0; filter:blur(1px); box-shadow:0 0 18px currentColor}
+    .b1{color:var(--accent)} .b2{color:var(--accent2)} .b3{color:var(--ok)}
+    .beam{animation:beam 2.6s ease-in-out infinite}
+    .b2{left:45%; transform:rotate(-7deg); animation-duration:2.2s}
+    .b3{left:55%; transform:rotate(7deg); animation-duration:3.1s}
+    @keyframes beam{0%{height:0;opacity:0} 14%{height:120%;opacity:.95} 60%{height:120%;opacity:.95} 100%{height:0;opacity:0}}
+    .fog{position:absolute; inset:auto -20% 0 -20%; height:42%; background: radial-gradient(50% 100% at 50% 100%, rgba(57,210,255,.24), transparent 68%), radial-gradient(50% 100% at 50% 100%, rgba(180,76,255,.16), transparent 70%); filter: blur(26px); opacity:.5; animation:fog 12s ease-in-out infinite alternate}
+    @keyframes fog{from{transform:translateY(8px)} to{transform:translateY(-8px)}}
+    @media (prefers-reduced-motion: reduce){.beam,.fog{animation:none}}
+
+    /* ===== SECTIONS ===== */
+    section{padding:64px 0}
+    .section-title{font:800 28px/1.1 Montserrat; margin:0 0 16px}
+    .grid{display:grid; gap:16px}
+    .two{grid-template-columns:1fr 1fr}
+    .three{grid-template-columns:repeat(3,1fr)}
+    @media (max-width:960px){.two,.three{grid-template-columns:1fr}}
+    .pill{display:inline-block; padding:6px 10px; border-radius:999px; border:1px solid var(--line); color:var(--muted); font-size:12px; margin-right:6px}
+    .list{margin:0; padding:0; list-style:none}
+    .list li{display:flex; gap:10px; padding:12px 0; border-bottom:1px dashed var(--line)}
+    .list li:last-child{border-bottom:none}
+
+    /* ===== FOOTER ===== */
+    footer{border-top:1px solid var(--line); background:rgba(7,10,20,.55)}
+    .footer{display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; padding:22px 0}
+    .micro{font-size:12px; color:var(--muted)}
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Person",
+    "name":"DJ Haemmer",
+    "jobTitle":"DJ",
+    "url":"https://example.com/",
+    "sameAs":["https://www.instagram.com/dj.haemmer/"],
+    "address":{"@type":"PostalAddress","addressLocality":"Hamm","addressRegion":"NW","addressCountry":"DE"}
+  }
+  </script>
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="nav" aria-label="Primäre Navigation">
+    <div class="container nav-inner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <h1>DJ Haemmer</h1>
+      </div>
+      <div class="nav-links" role="menubar">
+        <a role="menuitem" href="#about">Über mich</a>
+        <a role="menuitem" href="#leistungen">Leistungen</a>
+        <a role="menuitem" href="#termine">Termine</a>
+        <a role="menuitem" href="#media">Media</a>
+        <a role="menuitem" href="#kontakt" class="btn btn-primary">Jetzt buchen</a>
+      </div>
+      <button class="hamburger" aria-label="Menü öffnen" onclick="document.getElementById('drawer').hidden = !document.getElementById('drawer').hidden">☰</button>
+    </div>
+    <div id="drawer" class="drawer" hidden>
+      <div class="container" style="padding:8px 0">
+        <a href="#about" onclick="this.closest('#drawer').hidden=true">Über mich</a>
+        <a href="#leistungen" onclick="this.closest('#drawer').hidden=true">Leistungen</a>
+        <a href="#termine" onclick="this.closest('#drawer').hidden=true">Termine</a>
+        <a href="#media" onclick="this.closest('#drawer').hidden=true">Media</a>
+        <a href="#kontakt" class="btn" style="margin:8px 0 12px; display:inline-block" onclick="this.closest('#drawer').hidden=true">Jetzt buchen</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero" id="home">
+    <div class="container wrap">
+      <div>
+        <p class="eyebrow">Momente, die bleiben</p>
+        <h2 class="headline">Club‑ & Event‑DJ aus Hamm (NRW)</h2>
+        <p class="lead">Saubere Übergänge, treibende Sets und neonklare Ästhetik. Von 2000er‑Sing‑alongs über Deutschrap & Latin bis House/Avicii – ich bringe eure Crowd zuverlässig auf die Fläche.</p>
+        <div class="cta">
+          <a class="btn btn-primary" href="#kontakt">Booking anfragen</a>
+          <a class="btn" href="#termine">Termine</a>
+          <a class="btn" href="https://www.instagram.com/dj.haemmer/" target="_blank" rel="noopener">Instagram</a>
+        </div>
+        <div style="margin-top:18px">
+          <span class="pill">NRW & Umgebung</span>
+          <span class="pill">eigene Technik auf Anfrage</span>
+          <span class="pill">Versicherung & Rechnung</span>
+        </div>
+      </div>
+      <div class="card" aria-label="Showcase">
+        <div class="stage">
+          <span class="beam b1"></span>
+          <span class="beam b2"></span>
+          <span class="beam b3"></span>
+          <div class="fog"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ÜBER MICH -->
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title">Über mich</h2>
+      <div class="grid two">
+        <div class="card">
+          <p>Ich bin <strong>DJ Haemmer</strong> – 16, aus Hamm. Ich spiele <em>Latin, Deutschrap, 2000er Classics, House/Avicii‑Vibes</em> – sauber gemixt, publikumsnah, mit klarem Spannungsaufbau. Technik & Licht kann ich mitbringen.</p>
+          <div style="margin-top:10px">
+            <span class="pill">Clubs</span>
+            <span class="pill">Abi‑Bälle</span>
+            <span class="pill">Firmenevents</span>
+            <span class="pill">Open Air</span>
+          </div>
+        </div>
+        <div class="card">
+          <ul class="list">
+            <li><div><strong>Highlights</strong><br>Blue Nights (Hamm), Corporate Events, lokale Clubnächte, Sport‑Events.</div></li>
+            <li><div><strong>Set‑Style</strong><br>Mitsing‑Hooks, treibende Drops, smoothe Übergänge – keine toten Songs.</div></li>
+            <li><div><strong>Technik</strong><br>Pioneer‑Setup, PA nach Location, Nebel & Laser auf Anfrage.</div></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEISTUNGEN / VALUE -->
+  <section id="leistungen">
+    <div class="container">
+      <h2 class="section-title">Leistungen</h2>
+      <div class="grid three">
+        <div class="card">
+          <h3 style="margin:0 0 6px">Club & Nightlife</h3>
+          <p class="micro">Peak‑Time‑Energie, sauberer Mix, Crowd‑Reading.</p>
+        </div>
+        <div class="card">
+          <h3 style="margin:0 0 6px">Privatevents & Abi</h3>
+          <p class="micro">Planung, Musikwünsche, Moderation bei Bedarf.</p>
+        </div>
+        <div class="card">
+          <h3 style="margin:0 0 6px">Corporate</h3>
+          <p class="micro">Seriöses Auftreten, Rechnung, GEMA‑Know‑how.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TERMINE -->
+  <section id="termine">
+    <div class="container">
+      <h2 class="section-title">Upcoming Gigs</h2>
+      <div class="grid three">
+        <article class="card" itemscope itemtype="https://schema.org/Event">
+          <h3 style="margin:0 0 6px" itemprop="name">Blue Nights – Part 2</h3>
+          <p class="micro"><time itemprop="startDate" datetime="2025-11-07T19:00">07.11.2025</time> · Blue Liner Bar, Hamm</p>
+          <p>19:00–01:00 · 16+ · Tickets limitiert</p>
+          <link itemprop="url" href="#" />
+        </article>
+        <article class="card"><h3 style="margin:0 0 6px">Corporate Event</h3><p class="micro">Anfrage offen</p><p>2000er & House, saubere Übergänge.</p></article>
+        <article class="card"><h3 style="margin:0 0 6px">Dein Event?</h3><p class="micro">NRW & Umgebung</p><p>Jetzt unverbindlich anfragen.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- MEDIA / EPK -->
+  $1
+        <section id="media">
+  <div class="container">
+    <h2 class="section-title">Media & EPK</h2>
+    <div class="grid two">
+      <!-- Selbst gehostetes Teaser-Video -->
+      <div class="card">
+        <p style="margin-top:0">Teaser-Video</p>
+        <div style="position:relative; border-radius:14px; border:1px solid var(--line); overflow:hidden">
+          <video id="teaserVideo" playsinline controls preload="metadata"
+                 poster="/assets/dj-haemmer-poster.jpg"
+                 style="width:100%; height:auto; display:block; background:#000">
+            <source src="/assets/dj-haemmer-teaser-1080p.mp4" type="video/mp4">
+            <source src="/assets/dj-haemmer-teaser-720p.mp4" type="video/mp4">
+            <track kind="captions" srclang="de" src="/assets/dj-haemmer-teaser-de.vtt" label="Deutsch">
+            Dein Browser unterstützt das Video-Element nicht.
+          </video>
+          <button id="openLightbox" class="btn" style="position:absolute; right:12px; bottom:12px">Vollbild</button>
+        </div>
+        <p class="micro" style="margin-top:8px">Dateien im Repo ablegen: <code>/assets/dj-haemmer-teaser-1080p.mp4</code>, optional <code>-720p.mp4</code>, Poster: <code>dj-haemmer-poster.jpg</code>.</p>
+      </div>
+
+      <!-- Galerie (responsive, lazy) -->
+      <div class="card">
+        <p style="margin-top:0">Clips & Fotos</p>
+        <div class="grid three" style="gap:10px">
+          <picture>
+            <source srcset="/assets/dj-haemmer-crowd.jpg 1200w" type="image/jpeg">
+            <img src="/assets/dj-haemmer-crowd.jpg" alt="Crowd eskaliert bei DJ Haemmer"
+                 loading="lazy" decoding="async" style="border-radius:10px; width:100%">
+          </picture>
+          <picture>
+            <source srcset="/assets/dj-haemmer-decks.jpg 1200w" type="image/jpeg">
+            <img src="/assets/dj-haemmer-decks.jpg" alt="DJ Haemmer am Pult, Energie und Lichtshow"
+                 loading="lazy" decoding="async" style="border-radius:10px; width:100%">
+          </picture>
+          <picture>
+            <source srcset="/assets/dj-haemmer-poster.jpg 1200w" type="image/jpeg">
+            <img src="/assets/dj-haemmer-poster.jpg" alt="Teaser-Standbild"
+                 loading="lazy" decoding="async" style="border-radius:10px; width:100%">
+          </picture>
+        </div>
+        <div style="margin-top:12px"><a class="btn" href="/assets/DJ-Haemmer-EPK.pdf">EPK herunterladen (PDF)</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <!-- REFERENZEN -->
+  <section id="referenzen">
+    <div class="container">
+      <h2 class="section-title">Stimmen</h2>
+      <div class="grid three">
+        <div class="card"><p>“Mega Stimmung, sauberer Mix – Book‑again.”<br><span class="micro">– Veranstalter, Hamm</span></p></div>
+        <div class="card"><p>“Genau unser Sound. Professionell und pünktlich.”<br><span class="micro">– Corporate Client</span></p></div>
+        <div class="card"><p>“Von 0 auf Tanzfläche voll. Top.”<br><span class="micro">– Club‑Manager</span></p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KONTAKT -->
+  <section id="kontakt">
+    <div class="container">
+      <h2 class="section-title">Booking anfragen</h2>
+      <div class="grid two">
+        <form class="card" method="POST" action="https://formspree.io/f/yourid" onsubmit="return handleSubmit(event)">
+          <label>
+            <span style="display:block; margin-bottom:6px">Name*</span>
+            <input required type="text" name="name" placeholder="Vor- & Nachname" style="width:100%; padding:12px 14px; border-radius:12px; border:1px solid var(--line); background:rgba(255,255,255,.02); color:var(--ink)">
+          </label>
+          <div style="height:10px"></div>
+          <label>
+            <span style="display:block; margin-bottom:6px">E‑Mail*</span>
+            <input required type="email" name="email" placeholder="dein@mail.de" style="width:100%; padding:12px 14px; border-radius:12px; border:1px solid var(--line); background:rgba(255,255,255,.02); color:var(--ink)">
+          </label>
+          <div style="height:10px"></div>
+          <label>
+            <span style="display:block; margin-bottom:6px">Nachricht*</span>
+            <textarea required name="message" placeholder="Event, Datum, Location, Gästezahl…" rows="6" style="width:100%; padding:12px 14px; border-radius:12px; border:1px solid var(--line); background:rgba(255,255,255,.02); color:var(--ink)"></textarea>
+          </label>
+          <input type="hidden" name="_subject" value="Neue Booking‑Anfrage">
+          <div style="display:flex; gap:10px; align-items:center; margin-top:12px">
+            <button class="btn btn-primary" type="submit">Senden</button>
+            <span class="micro">oder Mail an <a href="mailto:booking@dj-haemmer.de">booking@dj-haemmer.de</a></span>
+          </div>
+          <p id="formMsg" class="micro" style="margin-top:8px"></p>
+        </form>
+        <div class="card">
+          <p style="margin-top:0">Direktlinks</p>
+          <p>
+            <a href="https://www.instagram.com/dj.haemmer/" target="_blank" rel="noopener">Instagram</a><br>
+            <a href="#media">Media</a><br>
+            <a href="#termine">Termine</a>
+          </p>
+          <p class="micro">Impressum/Datenschutz folgen – sobald die Domain aktiv ist, werden diese Seiten ergänzt.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer">
+      <div>© <span id="year"></span> DJ Haemmer · <span class="micro">“Momente, die bleiben”</span></div>
+      <div class="micro">
+        <a href="#" onclick="alert('Impressum folgt')">Impressum</a> ·
+        <a href="#" onclick="alert('Datenschutz folgt')">Datenschutz</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const y = document.getElementById('year'); if(y) y.textContent = new Date().getFullYear();
+    function handleSubmit(e){
+      const msg = document.getElementById('formMsg');
+      if(msg) msg.textContent = 'Sende…';
+      return true; // Formspree/Netlify übernimmt
+    }
+  </script>
+  <div id="lightbox" hidden style="position:fixed; inset:0; background:rgba(0,0,0,.92); display:grid; place-items:center; padding:20px; z-index:80">
+    <video id="lbVideo" playsinline controls style="width:min(100%,1100px); height:auto; background:#000; border-radius:12px; box-shadow:0 10px 40px rgba(0,0,0,.6)">
+      <source src="/assets/teaser-1080p.mp4" type="video/mp4">
+    </video>
+    <button id="closeLightbox" class="btn" style="position:absolute; top:18px; right:18px">Schließen</button>
+  </div>
+  <script>
+    // Lightbox Steuerung
+    const lb = document.getElementById('lightbox');
+    const open = document.getElementById('openLightbox');
+    const close = document.getElementById('closeLightbox');
+    const lbVideo = document.getElementById('lbVideo');
+    const teaser = document.getElementById('teaserVideo');
+    if(open && lb && lbVideo && teaser){
+      open.addEventListener('click', ()=>{ lb.hidden=false; lbVideo.currentTime = teaser.currentTime; lbVideo.play(); });
+      close.addEventListener('click', ()=>{ lbVideo.pause(); lb.hidden=true; });
+      lb.addEventListener('click', (e)=>{ if(e.target===lb){ lbVideo.pause(); lb.hidden=true; } });
+    }
+
+    // Autoplay teaser ohne Ton, wenn im Viewport (dezente Bewegung)
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(ent => {
+        if(ent.isIntersecting){
+          teaser.muted = true; teaser.play().catch(()=>{});
+        } else { teaser.pause(); }
+      });
+    }, {threshold: .6});
+    if(teaser) io.observe(teaser);
+  </script>
+</body>
+</html>
