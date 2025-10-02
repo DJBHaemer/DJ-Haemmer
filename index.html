@@ -16,14 +16,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#070a14;        
-      --surface:#0b1224;   
+      --bg:#070a14;
+      --surface:#0b1224;
       --line:rgba(255,255,255,.08);
-      --ink:#e7ecff;       
-      --muted:#a9b7ff;     
-      --accent:#39d2ff;    
-      --accent2:#b44cff;   
-      --ok:#00e6a0;        
+      --ink:#e7ecff;
+      --muted:#a9b7ff;
+      --accent:#39d2ff;
+      --accent2:#b44cff;
+      --ok:#00e6a0;
       --radius:18px;
       --shadow:0 6px 24px rgba(0,0,0,.35);
     }
@@ -235,29 +235,12 @@
     </div>
   </section>
 
-  <!-- MEDIA / EPK -->
+  <!-- MEDIA / EPK (nur Galerie) -->
   <section id="media">
     <div class="container">
       <h2 class="section-title">Media & EPK</h2>
       <div class="grid two">
-        <!-- Selbst gehostetes Teaser-Video -->
-        <div class="card">
-          <div style="position:relative; border-radius:14px; border:1px solid var(--line); overflow:hidden">
-            <video id="teaserVideo" playsinline controls preload="metadata"
-                   poster="/assets/dj-haemmer-poster.jpg"
-                   style="width:100%; height:auto; display:block; background:#000">
-              <!-- WICHTIG: echte Videoquellen -->
-              <source src="/assets/dj-haemmer-teaser-1080p.mp4" type="video/mp4">
-              <source src="/assets/dj-haemmer-teaser-720p.mp4" type="video/mp4">
-              <track kind="captions" srclang="de" src="/assets/dj-haemmer-teaser-de.vtt" label="Deutsch">
-              Dein Browser unterstützt das Video-Element nicht.
-            </video>
-            <button id="openLightbox" class="btn" style="position:absolute; right:12px; bottom:12px">Vollbild</button>
-          </div>
-          <p class="micro" style="margin-top:8px">Dateien im Repo ablegen: <code>/assets/dj-haemmer-teaser-1080p.mp4</code>, optional <code>-720p.mp4</code>, Poster: <code>dj-haemmer-poster.jpg</code>.</p>
-        </div>
-
-        <!-- Galerie (responsive, lazy) -->
+        <!-- Galerie -->
         <div class="card">
           <p style="margin-top:0">Clips & Fotos</p>
           <div class="grid three" style="gap:10px">
@@ -272,12 +255,18 @@
                    loading="lazy" decoding="async" style="border-radius:10px; width:100%">
             </picture>
             <picture>
-              <source srcset="/assets/dj-haemmer-poster.jpg 1200w" type="image/jpeg">
-              <img src="/assets/dj-haemmer-poster.jpg" alt="Teaser-Standbild"
+              <source srcset="/assets/preview.jpg 1200w" type="image/jpeg">
+              <img src="/assets/preview.jpg" alt="Teaser-Standbild"
                    loading="lazy" decoding="async" style="border-radius:10px; width:100%">
             </picture>
           </div>
           <div style="margin-top:12px"><a class="btn" href="/assets/DJ-Haemmer-EPK.pdf">EPK herunterladen (PDF)</a></div>
+        </div>
+
+        <!-- Platz für zweiten Card (optional) -->
+        <div class="card">
+          <p style="margin-top:0">Mixes / Sets</p>
+          <p class="micro">Link zu SoundCloud/YouTube einfügen – aktuell in Vorbereitung.</p>
         </div>
       </div>
     </div>
@@ -345,75 +334,14 @@
     </div>
   </footer>
 
-  <!-- Lightbox -->
-  <div id="lightbox" hidden style="position:fixed; inset:0; background:rgba(0,0,0,.92); display:grid; place-items:center; padding:20px; z-index:80">
-    <video id="lbVideo" playsinline controls style="width:min(100%,1100px); height:auto; background:#000; border-radius:12px; box-shadow:0 10px 40px rgba(0,0,0,.6)">
-      <source src="/assets/dj-haemmer-teaser-1080p.mp4" type="video/mp4">
-    </video>
-    <button id="closeLightbox" class="btn" style="position:absolute; top:18px; right:18px">Schließen</button>
-  </div>
-
   <script>
     // Jahr im Footer + Formularstatus
     const y = document.getElementById('year'); if (y) y.textContent = new Date().getFullYear();
-    function handleSubmit(e){ const msg = document.getElementById('formMsg'); if (msg) msg.textContent = 'Sende…'; return true; }
-
-    // ===== Video/Lightbox stabil (iOS/Android/Desktop) =====
-    const lb = document.getElementById('lightbox');
-    const openBtn = document.getElementById('openLightbox');
-    const closeBtn = document.getElementById('closeLightbox');
-    const lbVideo = document.getElementById('lbVideo');
-    const teaser = document.getElementById('teaserVideo');
-    const isMobile = matchMedia('(max-width: 860px)').matches;
-
-    // Startzustand
-    if (lb) lb.hidden = true;
-    if (lbVideo) { try { lbVideo.pause(); } catch(_){} }
-
-    // Mobile: kein Autoplay, Button ausblenden (nativer Player genügt)
-    if (isMobile) {
-      if (openBtn) openBtn.style.display = 'none';
-      if (teaser) { teaser.removeAttribute('autoplay'); teaser.muted = false; }
-    } else {
-      // Desktop: dezentes Auto-Play im Viewport
-      if ('IntersectionObserver' in window && teaser) {
-        const io = new IntersectionObserver(entries => {
-          entries.forEach(ent => {
-            if (ent.isIntersecting && !document.hidden) {
-              teaser.muted = true;
-              teaser.play().catch(()=>{});
-            } else {
-              teaser.pause();
-            }
-          });
-        }, { threshold: 0.8 });
-        io.observe(teaser);
-        document.addEventListener('visibilitychange', ()=>{ if (document.hidden) teaser.pause(); });
-      }
+    function handleSubmit(e){
+      const msg = document.getElementById('formMsg');
+      if (msg) msg.textContent = 'Sende…';
+      return true;
     }
-
-    // Lightbox öffnen (nur Desktop)
-    if (openBtn && lb && lbVideo && teaser && !isMobile) {
-      openBtn.addEventListener('click', () => {
-        lb.hidden = false;
-        try { lbVideo.currentTime = teaser.currentTime || 0; } catch(_) {}
-        lbVideo.play().catch(()=>{});
-      });
-    }
-
-    // Schließen (Button, Overlay, ESC)
-    function closeLightbox(){
-      try { lbVideo.pause(); } catch(_) {}
-      lb.hidden = true;
-    }
-    if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
-    if (lb) lb.addEventListener('click', (e)=>{ if (e.target === lb) closeLightbox(); });
-    document.addEventListener('keydown', (e)=>{ if (e.key === 'Escape') closeLightbox(); });
-
-    // iOS-Vollbild verlassen => schließen
-    ['webkitendfullscreen','fullscreenchange'].forEach(ev =>
-      document.addEventListener(ev, ()=>{ if (document.fullscreenElement == null) closeLightbox(); })
-    );
   </script>
 </body>
 </html>
